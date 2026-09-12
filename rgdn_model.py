@@ -84,7 +84,7 @@ class GradientSigmaGuidedAttention(nn.Module):
 
         # Detach and floor the normalizer to avoid a locally explosive
         # derivative through max-gradient normalization.
-        denom = grad_mag.amax(dim=(2, 3), keepdim=True).detach()
+        denom = grad_mag.amax(dim=(2, 3), keepdim=True)
         denom = denom.clamp_min(self.grad_norm_floor)
         grad_mag = (grad_mag / denom).clamp(0.0, 1.0)
 
